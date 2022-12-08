@@ -12,7 +12,7 @@ func init() {
 	tf := flags.TargetFlags{}
 	rf := flags.RuleInfoFlags{}
 
-	var ruleDenyCmd = &cobra.Command{
+	ruleDenyCmd := &cobra.Command{
 		Use:     "deny <file-path>",
 		Aliases: []string{"block"},
 		Short:   "Create a rule that applies the Blocklist policy to the specified file",

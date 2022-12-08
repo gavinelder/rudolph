@@ -14,9 +14,7 @@ import (
 	"github.com/airbnb/rudolph/pkg/types"
 )
 
-var (
-	RulesCmd *cobra.Command
-)
+var RulesCmd *cobra.Command
 
 func init() {
 	tf := flags.TargetFlags{}

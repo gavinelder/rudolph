@@ -10,7 +10,6 @@ import (
 // This object can be returned from the Lambda's main handler and will be picked up by
 // AWS Lambda and rendered into an HTTP Response
 func APIResponse(status int, rawBody interface{}) (*events.APIGatewayProxyResponse, error) {
-
 	resp := &events.APIGatewayProxyResponse{
 		Headers:    map[string]string{"Content-Type": "application/json"},
 		StatusCode: status,

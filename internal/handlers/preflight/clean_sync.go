@@ -41,7 +41,6 @@ func (c concreteCleanSyncService) determineCleanSync(machineID string, preflight
 		syncState,
 	)
 	return
-
 }
 
 func determineCleanSyncByRuleCount(preflightRequest *PreflightRequest) bool {
@@ -88,7 +87,6 @@ func daysSinceLastCleanSync(timeProvider clock.TimeProvider, prevSyncState *sync
 	diff := currentTime.Sub(lastCleanSyncTime)
 
 	return int(diff.Hours() / 24)
-
 }
 
 // shouldPerformCleanSync is a method to perform dithering in an attempt to prevent a surge of forced clean syncs at the same time
@@ -125,7 +123,7 @@ func machineIDToInt(machineID string) (int, error) {
 	// Convert machineIDHash into a hex which will be converted into a *int
 	bigInt := new(big.Int)
 	bigInt.SetString(hex.EncodeToString(machineIDHash.Sum(nil)), 16)
-	//machineIDFloat is required to perform mod math so convert the big int into a float
+	// machineIDFloat is required to perform mod math so convert the big int into a float
 	machineIDFloat, err := strconv.ParseFloat(bigInt.String(), 64)
 	if err != nil {
 		return result, errors.Wrap(err, "error parsing machineID into a float")

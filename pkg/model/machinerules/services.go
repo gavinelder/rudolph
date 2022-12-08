@@ -26,9 +26,7 @@ func (c ConcreteMachineRulesUpdater) UpdateMachineRulePolicy(machineID string, s
 	return UpdateMachineRule(c.Updater, machineID, sha256, ruleType, rulePolicy, expires)
 }
 
-//
 // This service exposes all machine rules access methods
-//
 type MachineRulesService interface {
 	Get(machineId string, sha256 string, ruleType types.RuleType) (rule *MachineRuleRow, err error)
 	Add(machineId string, sha256 string, ruleType types.RuleType, policy types.Policy, description string, expires time.Time) error
@@ -51,18 +49,23 @@ func GetMachineRulesService(dynamodb dynamodb.DynamoDBClient) MachineRulesServic
 func (s ConcreteMachineRulesService) Get(machineId string, sha256 string, ruleType types.RuleType) (rule *MachineRuleRow, err error) {
 	return getItemAsMachineRule(s.dynamodb, machineRulePK(machineId), machineRuleSK(sha256, ruleType))
 }
+
 func (s ConcreteMachineRulesService) Add(machineId string, sha256 string, ruleType types.RuleType, policy types.Policy, description string, expires time.Time) error {
 	return AddNewMachineRule(s.dynamodb, machineId, sha256, ruleType, policy, description, expires)
 }
+
 func (s ConcreteMachineRulesService) Update(machineId string, sha256 string, ruleType types.RuleType, rulePolicy types.Policy, expires time.Time) error {
 	return UpdateMachineRule(s.dynamodb, machineId, sha256, ruleType, rulePolicy, expires)
 }
+
 func (s ConcreteMachineRulesService) RemoveBySortKey(machineId string, ruleSortKey string) error {
 	return RemoveMachineRule(s.dynamodb, s.dynamodb, machineId, ruleSortKey)
 }
+
 func (s ConcreteMachineRulesService) Remove(machineId string, sha256 string, ruleType types.RuleType) error {
 	return RemoveMachineRule(s.dynamodb, s.dynamodb, machineId, machineRuleSK(sha256, ruleType))
 }
+
 func (s ConcreteMachineRulesService) GetMachineRules(machineId string) (items *[]MachineRuleRow, err error) {
 	return GetMachineRules(s.dynamodb, machineId)
 }

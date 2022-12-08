@@ -5,9 +5,7 @@ import (
 	"github.com/airbnb/rudolph/pkg/dynamodb"
 )
 
-//
 // This service exposes all machineconfiguration access methods
-//
 type MachineConfigurationService interface {
 	GetIntendedConfig(machineID string) (intendedConfig MachineConfiguration, err error)
 	GetIntendedGlobalConfig() (intendedConfig MachineConfiguration, isDefaultConfig bool, err error)

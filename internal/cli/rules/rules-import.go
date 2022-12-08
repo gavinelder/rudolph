@@ -31,7 +31,7 @@ func addRuleImportCommand() {
 	var filename string
 	var workers int
 
-	var ruleImportCmd = &cobra.Command{
+	ruleImportCmd := &cobra.Command{
 		Use:     "import <file-name>",
 		Aliases: []string{"rules-import"},
 		Short:   "Imports riles from a csv file",

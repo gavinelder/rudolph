@@ -10,7 +10,7 @@ import (
 )
 
 func TestEventuploadHandler_InvalidMethod(t *testing.T) {
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod: "GET",
 	}
 
@@ -23,7 +23,7 @@ func TestEventuploadHandler_InvalidMethod(t *testing.T) {
 
 func TestEventuploadHandler_IncorrectType(t *testing.T) {
 	// If the request contains a mediatype that's not json reject it
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/eventupload/{machine_id}",
 		PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B4831"},
@@ -39,7 +39,7 @@ func TestEventuploadHandler_IncorrectType(t *testing.T) {
 
 func TestEventuploadHandler_InvalidPathParameter(t *testing.T) {
 	// If the request contains a non-valid path parameter
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/eventupload/{machine_id}",
 		PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B48311"},
@@ -55,7 +55,7 @@ func TestEventuploadHandler_InvalidPathParameter(t *testing.T) {
 
 func TestEventuploadHandler_BlankPathParameter(t *testing.T) {
 	// If the request contains a blank path parameter
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/eventupload/{machine_id}",
 		PathParameters: map[string]string{"machine_id": ""},
@@ -71,7 +71,7 @@ func TestEventuploadHandler_BlankPathParameter(t *testing.T) {
 
 func TestEventuploadHandler_EmptyBody(t *testing.T) {
 	// If the request contains a mediatype that's not json reject it
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/eventupload/{machine_id}",
 		PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B4831"},
@@ -88,7 +88,7 @@ func TestEventuploadHandler_EmptyBody(t *testing.T) {
 
 func TestEventuploadHandler_InvalidBody(t *testing.T) {
 	// If the request contains a mediatype that's not json reject it
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/eventupload/{machine_id}",
 		PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B4831"},
@@ -120,7 +120,7 @@ func TestEventuploadHandler_Kinesis_InternalServerError(t *testing.T) {
 			),
 		}
 
-		var request = events.APIGatewayProxyRequest{
+		request := events.APIGatewayProxyRequest{
 			HTTPMethod:     "POST",
 			Resource:       "/eventupload/{machine_id}",
 			PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B4831"},
@@ -178,7 +178,7 @@ func TestEventuploadHandler_Kinesis_OK(t *testing.T) {
 			),
 		}
 
-		var request = events.APIGatewayProxyRequest{
+		request := events.APIGatewayProxyRequest{
 			HTTPMethod:     "POST",
 			Resource:       "/eventupload/{machine_id}",
 			PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B4831"},

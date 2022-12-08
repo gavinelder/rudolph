@@ -17,7 +17,7 @@ import (
 func addRuleExportCommand() {
 	var filename string
 	var format string
-	var ruleExportCmd = &cobra.Command{
+	ruleExportCmd := &cobra.Command{
 		Use:     "export  <file-name>",
 		Aliases: []string{"rules-export"},
 		Short:   "Export all rules into a csv file",
@@ -84,7 +84,7 @@ func runJsonExport(client dynamodb.QueryAPI, filename string) (err error) {
 	if err != nil {
 		return
 	}
-	err = ioutil.WriteFile(filename, jsondata, 0644)
+	err = ioutil.WriteFile(filename, jsondata, 0o644)
 	if err != nil {
 		return
 	}

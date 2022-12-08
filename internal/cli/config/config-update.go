@@ -17,13 +17,11 @@ import (
 )
 
 func init() {
-	var (
-		clientModeArg flags.ClientMode
-	)
+	var clientModeArg flags.ClientMode
 
 	tf := flags.TargetFlags{}
 
-	var configUpdateClientModeCmd = &cobra.Command{
+	configUpdateClientModeCmd := &cobra.Command{
 		Use:   "update [-m <machine-id>|--global] [-c <ClientMode - 'monitor' or 'lockdown'>|--client-mode]",
 		Short: "Update the client-mode globally or for a specific machine UUID",
 		Args:  cobra.NoArgs,
@@ -57,7 +55,8 @@ func init() {
 func updateConfig(
 	service machineconfiguration.MachineConfigurationService,
 	tf flags.TargetFlags,
-	clientModeArg flags.ClientMode) (err error) {
+	clientModeArg flags.ClientMode,
+) (err error) {
 	clientMode := clientModeArg.AsClientMode()
 
 	// Get machineID from flags
@@ -120,5 +119,4 @@ func updateConfig(
 		fmt.Println("Success! Configuration was sent properly to DynamoDB...")
 	}
 	return
-
 }

@@ -21,12 +21,10 @@ import (
 // The `rule` command itself does not take any flags or run anything, it's
 // simply a passthrough to other subcommands
 
-var (
-	RuleCmd = &cobra.Command{
-		Use:   "rule",
-		Short: "Perform various rule operations",
-	}
-)
+var RuleCmd = &cobra.Command{
+	Use:   "rule",
+	Short: "Perform various rule operations",
+}
 
 func applyPolicyForPath(timeProvider clock.TimeProvider, client dynamodb.DynamoDBClient, policy types.Policy, tf flags.TargetFlags, rf flags.RuleInfoFlags) (err error) {
 	// Second, determine the rule type and sha256

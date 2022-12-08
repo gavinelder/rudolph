@@ -55,6 +55,7 @@ func (m *MockDynamodb) GetItem(key dynamodb.PrimaryKey, consistentRead bool) (*a
 	args := m.Called(key, consistentRead)
 	return args.Get(0).(*awsdynamodb.GetItemOutput), args.Error(1)
 }
+
 func (m *MockDynamodb) PutItem(item interface{}) (*awsdynamodb.PutItemOutput, error) {
 	args := m.Called(item)
 	return args.Get(0).(*awsdynamodb.PutItemOutput), args.Error(1)

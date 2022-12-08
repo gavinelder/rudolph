@@ -16,12 +16,11 @@ import (
 func init() {
 	tf := flags.TargetFlags{}
 
-	var configGetCmd = &cobra.Command{
+	configGetCmd := &cobra.Command{
 		Use:   "get [-m <machine-id>|--global]",
 		Short: "Get the current global or specific machine UUID specific configuration from the sync server",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-
 			region, _ := cmd.Flags().GetString("region")
 			table, _ := cmd.Flags().GetString("dynamodb_table")
 

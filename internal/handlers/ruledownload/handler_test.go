@@ -8,9 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-//
 // Test Mocks
-//
 type mockCursorService func(req RuledownloadRequest, machineID string) (cursor ruledownloadCursor, err error)
 
 func (m mockCursorService) ConstructCursor(req RuledownloadRequest, machineID string) (cursor ruledownloadCursor, err error) {
@@ -35,17 +33,15 @@ func (m mockMachineRuleDownloader) handle(machineID string, ruledownloadRequest 
 	return m(machineID, ruledownloadRequest)
 }
 
-//
 // Coerce our mocks to conform to the interfaces that they are intended to implement
-//
-var _ ruledownloadCursorService = mockCursorService(nil)
-var _ globalRuleDownloader = mockGlobalRuleDownloader(nil)
-var _ feedRuleDownloader = mockFeedRuleDownloader(nil)
-var _ machineRuleDownloder = mockMachineRuleDownloader(nil)
+var (
+	_ ruledownloadCursorService = mockCursorService(nil)
+	_ globalRuleDownloader      = mockGlobalRuleDownloader(nil)
+	_ feedRuleDownloader        = mockFeedRuleDownloader(nil)
+	_ machineRuleDownloder      = mockMachineRuleDownloader(nil)
+)
 
-//
 // Actual Tests
-//
 func Test_PostRuledownloadHandler_SendToCorrectHandler(t *testing.T) {
 	type test struct {
 		cursor         ruledownloadCursor

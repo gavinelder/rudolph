@@ -124,9 +124,11 @@ type nullCache struct{}
 func (n nullCache) Has(key string) bool {
 	return false
 }
+
 func (n nullCache) Get(key string) *MachineConfiguration {
 	return nil
 }
+
 func (n nullCache) Set(key string, config *MachineConfiguration) bool {
 	return false
 }
@@ -136,7 +138,7 @@ func TestGetDesiredConfig_DynamodbReturnsStuff(t *testing.T) {
 
 	// Example config
 	// {"client_mode":"MONITOR","blacklist_regex":"","whitelist_regex":"","batch_size":50,"enable_bundles":false,"enabled_transitive_whitelisting":false}
-	var globalConfig = map[string]types.AttributeValue{
+	globalConfig := map[string]types.AttributeValue{
 		"SK":                    &types.AttributeValueMemberS{Value: "Current"},
 		"MachineID":             &types.AttributeValueMemberS{Value: "global"},
 		"ClientMode":            &types.AttributeValueMemberN{Value: "1"},
@@ -172,7 +174,6 @@ func TestGetDesiredConfig_DynamodbReturnsStuff(t *testing.T) {
 	assert.Equal(t, 50, retrievedConfig.BatchSize)
 	assert.Equal(t, false, retrievedConfig.EnableBundles)
 	assert.Equal(t, false, retrievedConfig.EnabledTransitiveRules)
-
 }
 
 func TestGetMachineConfig_DynamodbReturnsCorrectly(t *testing.T) {
@@ -182,7 +183,7 @@ func TestGetMachineConfig_DynamodbReturnsCorrectly(t *testing.T) {
 
 	// Example config
 	// {"client_mode":"MONITOR","blocked_path_regex":"","allowed_path_regex":"","batch_size":50,"enable_bundles":false,"enable_transitive_rules":false}
-	var machineConfig = map[string]types.AttributeValue{
+	machineConfig := map[string]types.AttributeValue{
 		"PK":                    &types.AttributeValueMemberS{Value: machinePK},
 		"SK":                    &types.AttributeValueMemberS{Value: currentSK},
 		"MachineID":             &types.AttributeValueMemberS{Value: "AAAAAAAA-A00A-1234-1234-5864377B4831"},
@@ -218,7 +219,6 @@ func TestGetMachineConfig_DynamodbReturnsCorrectly(t *testing.T) {
 	assert.Equal(t, true, retrievedConfig.EnableBundles)
 	assert.Equal(t, false, retrievedConfig.EnabledTransitiveRules)
 	assert.Equal(t, true, retrievedConfig.CleanSync)
-
 }
 
 func TestGetGlobalConfig_DynamodbReturnsCorrectly(t *testing.T) {
@@ -226,7 +226,7 @@ func TestGetGlobalConfig_DynamodbReturnsCorrectly(t *testing.T) {
 
 	// Example config
 	// {"client_mode":"MONITOR","blocked_path_regex":"","allowed_path_regex":"","batch_size":50,"enable_bundles":false,"enable_transitive_rules":false}
-	var globalConfig = map[string]types.AttributeValue{
+	globalConfig := map[string]types.AttributeValue{
 		"PK":                    &types.AttributeValueMemberS{Value: globalConfigurationPK},
 		"SK":                    &types.AttributeValueMemberS{Value: currentSK},
 		"ClientMode":            &types.AttributeValueMemberN{Value: "2"},

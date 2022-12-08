@@ -15,9 +15,7 @@ import (
 	"github.com/airbnb/rudolph/pkg/scan"
 )
 
-var (
-	RepairCmd *cobra.Command
-)
+var RepairCmd *cobra.Command
 
 func init() {
 	RepairCmd = &cobra.Command{
@@ -37,7 +35,6 @@ func init() {
 }
 
 func repair(scanService scan.ScanService, deleter dynamodb.DeleteItemAPI) error {
-
 	// Configuration
 	pageSize := int32(10)
 	delete := false

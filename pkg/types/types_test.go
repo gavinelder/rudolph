@@ -9,9 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var (
-	av dynamodb.AttributeValue
-)
+var av dynamodb.AttributeValue
 
 func TestTypesClientMode_Marshal(t *testing.T) {
 	t.Run("Monitor", func(t *testing.T) {
@@ -147,7 +145,6 @@ func TestTypesPolicy_Marshall(t *testing.T) {
 		assert.NotEmpty(t, err)
 		assert.EqualError(t, err, "unknown policy 7")
 	})
-
 }
 
 func TestTypesPolicy_Unmarshal(t *testing.T) {
@@ -226,6 +223,7 @@ func TestTypesPolicy_MarshalDynamoDBAttributeValue_Silent_Blocklist(t *testing.T
 	assert.Empty(t, err)
 	assert.Equal(t, av, expectAv)
 }
+
 func TestTypesPolicy_MarshalDynamoDBAttributeValue_Remove(t *testing.T) {
 	var av dynamodb.AttributeValue
 	var policy Policy = 4
@@ -258,7 +256,7 @@ func TestTypesPolicy_MarshalDynamoDBAttributeValue_ErrorsOut(t *testing.T) {
 	var policy Policy = 7
 
 	err := policy.MarshalDynamoDBAttributeValue(&av)
-	//expectAv := dynamodb.AttributeValue{N: aws.String("7")}
+	// expectAv := dynamodb.AttributeValue{N: aws.String("7")}
 	assert.NotEmpty(t, err)
 	assert.EqualError(t, err, fmt.Sprintf("%s%q", "unknown policy value ", policy))
 }

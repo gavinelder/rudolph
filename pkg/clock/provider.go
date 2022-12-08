@@ -41,11 +41,12 @@ type TimeMachine struct {
 func (p *TimeMachine) Now() time.Time {
 	return p.Current
 }
+
 func (p *TimeMachine) Travel(newTime time.Time) {
 	p.Current = newTime
 }
 
 func Y2KTime() time.Time {
-	var theTime, _ = ParseRFC3339("2000-01-01T00:00:00Z")
+	theTime, _ := ParseRFC3339("2000-01-01T00:00:00Z")
 	return theTime.UTC()
 }

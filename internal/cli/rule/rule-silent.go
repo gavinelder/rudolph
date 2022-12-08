@@ -12,7 +12,7 @@ func init() {
 	tf := flags.TargetFlags{}
 	rf := flags.RuleInfoFlags{}
 
-	var ruleSilentCmd = &cobra.Command{
+	ruleSilentCmd := &cobra.Command{
 		Use:     "silent",
 		Aliases: []string{"silentblock"},
 		Short:   "Create a rule that applies the SilentBlocklist policy to the specified file",

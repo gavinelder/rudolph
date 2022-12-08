@@ -31,7 +31,7 @@ func init() {
 
 	ruleHandler := ruleHandler{}
 
-	var ruleUpdateCmd = &cobra.Command{
+	ruleUpdateCmd := &cobra.Command{
 		Use:     "update <file-path>",
 		Aliases: []string{"update"},
 		Short:   "Update an existing rule",

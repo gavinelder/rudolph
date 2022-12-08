@@ -31,7 +31,7 @@ func init() {
 
 	tf := flags.TargetFlags{}
 
-	var configSetCmd = &cobra.Command{
+	configSetCmd := &cobra.Command{
 		Use:   "set [-m <machine-id>|--global] [-c <ClientMode - 'monitor' or 'lockdown'>|--client-mode]",
 		Short: "Create a configuration and set globally or a specific machine UUID",
 		Args:  cobra.NoArgs,
@@ -96,7 +96,8 @@ func applyConfig(
 	isEnabledTransitiveRules bool,
 	isCleanSync bool,
 	uploadLogsUrlArgs string,
-	fullSyncIntervalArg int) (err error) {
+	fullSyncIntervalArg int,
+) (err error) {
 	clientMode := clientModeArg.AsClientMode()
 
 	// Get machineID from flags
@@ -176,5 +177,4 @@ func applyConfig(
 		fmt.Println("Success! Configuration was sent properly to DynamoDB...")
 	}
 	return
-
 }

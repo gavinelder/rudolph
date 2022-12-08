@@ -23,8 +23,10 @@ func (m mockUpdater) UpdateItem(key dynamodb.PrimaryKey, item interface{}) (*aws
 	return m(key, item)
 }
 
-var _ dynamodb.GetItemAPI = mockGetter(nil)
-var _ dynamodb.UpdateItemAPI = mockUpdater(nil)
+var (
+	_ dynamodb.GetItemAPI    = mockGetter(nil)
+	_ dynamodb.UpdateItemAPI = mockUpdater(nil)
+)
 
 func Test_RemoveMachineRule_OK(t *testing.T) {
 	type test struct {

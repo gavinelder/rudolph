@@ -8,7 +8,9 @@ import (
 // PreflightResponse represents sync response returned to a Santa client by the sync server.
 //
 // WARNING: The PreflightResponse copies its format directly from the database; make sure this struct's fields
-//   are consistent with the fields of the store.MachineConfiguration type
+//
+//	are consistent with the fields of the store.MachineConfiguration type
+//
 // Use Santa defined constants
 // https://github.com/google/santa/blob/main/Source/santactl/Commands/sync/SNTCommandSyncConstants.m#L32-L35
 type PreflightResponse struct {
@@ -40,5 +42,5 @@ func ConstructPreflightResponse(machineConfiguration machineconfiguration.Machin
 		// FYI: Sending down a clean sync to the client instructs it to erase all rules, so be careful!
 	}
 
-	//return (*PreflightResponse)(&machineConfiguration)
+	// return (*PreflightResponse)(&machineConfiguration)
 }

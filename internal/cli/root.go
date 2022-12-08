@@ -66,7 +66,6 @@ var RootCmd = &cobra.Command{
 	SilenceUsage: true,
 	Long:         "cli for interacting with Santa server",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-
 		_, err := retrieveConfig(cmd)
 		if err != nil {
 			return err

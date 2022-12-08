@@ -90,5 +90,4 @@ func retrieveConfig(cmd *cobra.Command) (*environmentConfiguration, error) {
 	cmd.Flags().Set("dynamodb_table", fmt.Sprintf("%s_rudolph_store", config.Prefix))
 
 	return config, err
-
 }
