@@ -2,7 +2,8 @@ package santa_sensor
 
 import (
 	"encoding/xml"
-	"io/ioutil"
+	"io"
+	"log"
 	"os"
 
 	"github.com/pkg/errors"
@@ -37,15 +38,22 @@ func GetMyMachineUUID() (machineUUID string, err error) {
 	// fmt.Println("Successfully opened santa machine mapping xml")
 
 	// defer the closing of our xmlFile so that we can parse it later on
-	defer xmlFile.Close()
+	defer func() {
+		if err := xmlFile.Close(); err != nil {
+			log.Fatal("failed to close file")
+		}
+	}()
 
-	byteValue, _ := ioutil.ReadAll(xmlFile)
+	byteValue, _ := io.ReadAll(xmlFile)
 
 	// we initialize our Users array
 	var doc santaPlistXMLDocument
 	// we unmarshal our byteArray which contains our
 	// xmlFiles content into 'users' which we defined above
-	xml.Unmarshal(byteValue, &doc)
+	err = xml.Unmarshal(byteValue, &doc)
+	if err != nil {
+		return "Unable to unmarshal into users", err
+	}
 
 	if len(doc.Data.Keys) != 2 || len(doc.Data.Strings) != 2 {
 		err = errors.New("Invalid XML parsed or something")

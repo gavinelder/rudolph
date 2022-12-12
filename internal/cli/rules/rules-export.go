@@ -3,7 +3,7 @@ package rules
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -84,7 +84,7 @@ func runJsonExport(client dynamodb.QueryAPI, filename string) (err error) {
 	if err != nil {
 		return
 	}
-	err = ioutil.WriteFile(filename, jsondata, 0o644)
+	err = os.WriteFile(filename, jsondata, 0o600)
 	if err != nil {
 		return
 	}

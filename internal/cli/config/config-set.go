@@ -137,7 +137,11 @@ func applyConfig(
 	fmt.Fprintln(writer, "CleanSync:\t", isCleanSync)
 	fmt.Fprintln(writer, "FullSyncInterval:\t", fullSyncIntervalArg)
 	fmt.Fprintln(writer, "UploadLogUrl:\t \"", uploadLogsUrlArgs, "\"")
-	writer.Flush()
+	// handle err for writer.Flush
+	err = writer.Flush()
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Println()
 	fmt.Println(`Apply changes? (Enter: "yes" or "ok")`)
 	fmt.Print("> ")

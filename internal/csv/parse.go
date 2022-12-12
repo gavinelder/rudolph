@@ -4,7 +4,9 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"log"
 	"os"
+	"path"
 	"sync"
 
 	"github.com/pkg/errors"
@@ -18,7 +20,7 @@ import (
 func ParseCsvFile(filepath string) (output chan map[string]string, err error) {
 	output = make(chan map[string]string)
 
-	f, err := os.Open(filepath)
+	f, err := os.Open(path.Clean(filepath))
 	if err != nil {
 		err = errors.Wrapf(err, "failed to open file: %s", filepath)
 		return
@@ -32,7 +34,12 @@ func ParseCsvFile(filepath string) (output chan map[string]string, err error) {
 	}
 
 	go func() {
-		defer f.Close() // this needs to be done here, or will result in error reading a closed file
+		// this needs to be done here, or will result in error reading a closed file
+		defer func() {
+			if err := f.Close(); err != nil {
+				log.Fatal("failed to close file")
+			}
+		}()
 		for {
 			line, err := reader.Read()
 			if err == io.EOF {
@@ -65,14 +72,20 @@ func WriteCsvFile(
 	headers []string,
 	input <-chan []string,
 ) (wg *sync.WaitGroup, err error) {
-	f, err := os.Create(filename)
+	// f, err := os.Create(filename)
+
+	f, err := os.Create(path.Clean(filename))
 	if err != nil {
 		err = errors.Wrapf(err, "failed to open file for writing: %s", filename)
 		return
 	}
 	err = f.Truncate(0)
 	if err != nil {
-		f.Close()
+		func() {
+			if err := f.Close(); err != nil {
+				log.Fatal("failed to close file")
+			}
+		}()
 		err = errors.Wrap(err, "file is not writable")
 		return
 	}
@@ -89,7 +102,11 @@ func WriteCsvFile(
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		defer f.Close()
+		defer func() {
+			if err := f.Close(); err != nil {
+				log.Fatal("failed to close file")
+			}
+		}()
 		defer csvWriter.Flush()
 
 		for record := range input {

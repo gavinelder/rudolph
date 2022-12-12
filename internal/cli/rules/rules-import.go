@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
+	"log"
 	"os"
+	"path"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -81,12 +83,16 @@ func runJsonImport(
 	filename string,
 	numWorkers int,
 ) (err error) {
-	fp, err := os.Open(filename)
+	fp, err := os.Open(path.Clean(filename))
 	if err != nil {
 		return
 	}
-	defer fp.Close()
-	contents, err := ioutil.ReadAll(fp)
+	defer func() {
+		if err := fp.Close(); err != nil {
+			log.Fatal("failed to close file")
+		}
+	}()
+	contents, err := io.ReadAll(fp)
 	if err != nil {
 		return
 	}

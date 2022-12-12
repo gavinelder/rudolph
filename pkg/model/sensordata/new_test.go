@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/airbnb/rudolph/pkg/clock"
-	"github.com/airbnb/rudolph/pkg/types"
 	rudolphtype "github.com/airbnb/rudolph/pkg/types"
 	"github.com/stretchr/testify/assert"
 )
@@ -30,7 +29,7 @@ func Test_CreateSyncState(t *testing.T) {
 		primaryUser          string
 		expectedTime         string
 		expectedExpiresAfter int64
-		expectedDataType     types.DataType
+		expectedDataType     rudolphtype.DataType
 	}
 
 	machineID := "AAAAAAAA-A00A-1234-1234-5864377B4831"
