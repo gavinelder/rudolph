@@ -88,10 +88,7 @@ func updateConfig(
 	fmt.Fprintln(writer, "Config\t Setting")
 	fmt.Fprintln(writer, "MachineID:\t", machineID, suffix)
 	fmt.Fprintln(writer, "ClientMode:\t", clientMode, "-->(", string(clientModeText), ")")
-	err = writer.Flush()
-	if err != nil {
-		log.Fatal("Error flushing the writer: ", err)
-	}
+	writer.Flush()
 	fmt.Println()
 	fmt.Println(`Apply changes? (Enter: "yes" or "ok")`)
 	fmt.Print("> ")

@@ -138,10 +138,7 @@ func applyConfig(
 	fmt.Fprintln(writer, "FullSyncInterval:\t", fullSyncIntervalArg)
 	fmt.Fprintln(writer, "UploadLogUrl:\t \"", uploadLogsUrlArgs, "\"")
 	// handle err for writer.Flush
-	err = writer.Flush()
-	if err != nil {
-		log.Fatal(err)
-	}
+	_ = writer.Flush()
 	fmt.Println()
 	fmt.Println(`Apply changes? (Enter: "yes" or "ok")`)
 	fmt.Print("> ")
