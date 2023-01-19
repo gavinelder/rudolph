@@ -7,9 +7,7 @@ import (
 // config specific variables
 // isGlobal, machineIDArg reside in parser.go
 
-var (
-	ConfigCmd *cobra.Command
-)
+var ConfigCmd *cobra.Command
 
 func init() {
 	ConfigCmd = &cobra.Command{

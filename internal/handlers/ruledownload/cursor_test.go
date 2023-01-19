@@ -23,8 +23,10 @@ func (m mockGetter) GetItem(key dynamodb.PrimaryKey, consistentRead bool) (*awsd
 	return m(key, consistentRead)
 }
 
-var _ dynamodb.GetItemAPI = mockGetter(nil)
-var _ dynamodb.UpdateItemAPI = mockUpdater(nil)
+var (
+	_ dynamodb.GetItemAPI    = mockGetter(nil)
+	_ dynamodb.UpdateItemAPI = mockUpdater(nil)
+)
 
 type mockTimeProvider struct{}
 

@@ -16,7 +16,7 @@ import (
 func init() {
 	tf := flags.TargetFlags{}
 
-	var removeRuleCmd = &cobra.Command{
+	removeRuleCmd := &cobra.Command{
 		Use:     "remove <rule-name>",
 		Aliases: []string{"delete"},
 		Short:   "Removes/deletes a rule from the backing store",

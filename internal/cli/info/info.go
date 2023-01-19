@@ -8,9 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	InfoCmd *cobra.Command
-)
+var InfoCmd *cobra.Command
 
 func init() {
 	InfoCmd = &cobra.Command{

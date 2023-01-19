@@ -89,7 +89,6 @@ func (c client) sendToFirehose(machineID string, events firehoseEventBatch) (res
 
 	for _, event := range events.Items {
 		batch, err := json.Marshal(event)
-
 		if err != nil {
 			log.Printf("marshalling firehose eventupload event encountered an error, %v", err)
 			return nil, err
@@ -126,9 +125,7 @@ func eventBatches(events FirehoseEvents, machineID string, limit int) []firehose
 		}
 
 		var batchItems []interface{}
-		for _, item := range slice[0:limit] {
-			batchItems = append(batchItems, item)
-		}
+		batchItems = append(batchItems, slice[0:limit]...)
 		batch := firehoseEventBatch{Items: batchItems}
 
 		batches = append(batches, batch)

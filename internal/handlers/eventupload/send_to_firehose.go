@@ -8,7 +8,7 @@ import (
 )
 
 func sendToFirehose(firehoseClient firehose.FirehoseClient, machineID string, events []EventUploadEvent) error {
-	var forwardedEvents = convertRequestEventsToUploadEvents(machineID, events)
+	forwardedEvents := convertRequestEventsToUploadEvents(machineID, events)
 	err := firehoseClient.Send(machineID, firehose.FirehoseEvents{Items: forwardedEvents})
 	if err != nil {
 		log.Printf("%s\n%s", err.Error(), "upload to firehose was not successful")

@@ -8,8 +8,9 @@ import (
 
 // GetSensorData gets a previously stored sensor data
 // BUG(derek.wang) In a NoSQL database like DynamoDB the whole idea of save-then-get is an antipattern.
-//   It requires this call to be strongly consistent with doubles the cost.
-//   We should think about a different way of designing the data model.
+//
+//	It requires this call to be strongly consistent with doubles the cost.
+//	We should think about a different way of designing the data model.
 func GetSensorData(client dynamodb.GetItemAPI, machineID string) (sensorData *SensorData, err error) {
 	pk, sk := MachineIDSensorDataPKSK(machineID)
 
@@ -17,7 +18,6 @@ func GetSensorData(client dynamodb.GetItemAPI, machineID string) (sensorData *Se
 		PartitionKey: pk,
 		SortKey:      sk,
 	}, false)
-
 	if err != nil {
 		return
 	}

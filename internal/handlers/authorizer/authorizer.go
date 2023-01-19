@@ -9,9 +9,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-var (
-	errBlankRequestBody = errors.New("Request body is blank")
-)
+var errBlankRequestBody = errors.New("Request body is blank")
 
 type authorizerEnvironment struct {
 	Region    string
@@ -19,9 +17,7 @@ type authorizerEnvironment struct {
 	AccountID string
 }
 
-var (
-	authorizerEnv authorizerEnvironment
-)
+var authorizerEnv authorizerEnvironment
 
 func init() {
 	authorizerEnv = authorizerEnvironment{

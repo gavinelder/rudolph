@@ -8,10 +8,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var frozenTime, _ = clock.ParseRFC3339("2000-01-01T00:00:00Z")
-var timeProvider = clock.FrozenTimeProvider{
-	Current: frozenTime,
-}
+var (
+	frozenTime, _ = clock.ParseRFC3339("2000-01-01T00:00:00Z")
+	timeProvider  = clock.FrozenTimeProvider{
+		Current: frozenTime,
+	}
+)
 
 func Test_CreateSyncState(t *testing.T) {
 	type test struct {

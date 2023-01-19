@@ -279,7 +279,6 @@ func getItemAsMachineConfiguration(client dynamodb.GetItemAPI, partitionKey stri
 		},
 		false,
 	)
-
 	if err != nil {
 		return
 	}

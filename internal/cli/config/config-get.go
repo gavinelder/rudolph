@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"text/tabwriter"
 
@@ -16,12 +17,11 @@ import (
 func init() {
 	tf := flags.TargetFlags{}
 
-	var configGetCmd = &cobra.Command{
+	configGetCmd := &cobra.Command{
 		Use:   "get [-m <machine-id>|--global]",
 		Short: "Get the current global or specific machine UUID specific configuration from the sync server",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-
 			region, _ := cmd.Flags().GetString("region")
 			table, _ := cmd.Flags().GetString("dynamodb_table")
 
@@ -100,7 +100,10 @@ func getConfig(service machineconfiguration.MachineConfigurationService, tf flag
 	fmt.Fprintln(writer, "CleanSync:\t", config.CleanSync)
 	fmt.Fprintln(writer, "FullSyncInterval:\t", config.FullSyncInterval)
 	fmt.Fprintln(writer, "UploadLogUrl:\t \"", config.UploadLogsURL, "\"")
-	writer.Flush()
+	err = writer.Flush()
+	if err != nil {
+		log.Fatal("Enable to flush writer:", err)
+	}
 
 	return
 }

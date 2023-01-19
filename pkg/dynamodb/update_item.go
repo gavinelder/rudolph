@@ -50,7 +50,6 @@ func updateItemToDynamoDB(tableName string, api dynamodbUpdateItemAPI, updateKey
 		WithUpdate(updates).
 		WithCondition(conditions).
 		Build()
-
 	if err != nil {
 		return nil, err
 	}

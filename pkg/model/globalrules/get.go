@@ -25,7 +25,6 @@ func getItemAsGlobalRule(client dynamodb.GetItemAPI, partitionKey string, sortKe
 		},
 		false,
 	)
-
 	if err != nil {
 		return
 	}

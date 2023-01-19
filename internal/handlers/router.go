@@ -14,9 +14,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-var (
-	handlers []HandlerInterface
-)
+var handlers []HandlerInterface
 
 func init() {
 	handlers = []HandlerInterface{
@@ -33,7 +31,6 @@ func ApiRouter(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyRe
 	log.Printf("Api Request: %+v", request)
 
 	response, err := getResponse(request)
-
 	if err != nil {
 		log.Printf("Api ERROR: %+v", err)
 	}

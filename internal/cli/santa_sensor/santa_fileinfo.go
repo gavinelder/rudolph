@@ -8,7 +8,8 @@ import (
 )
 
 // SantaFileInfo maps to the data output by santactl:
-//  https://github.com/google/santa/blob/d17aeac2f4331584db51de432ace3465026e1259/Source/santactl/Commands/SNTCommandFileInfo.m#L199-L214
+//
+//	https://github.com/google/santa/blob/d17aeac2f4331584db51de432ace3465026e1259/Source/santactl/Commands/SNTCommandFileInfo.m#L199-L214
 type santaFileInfo struct {
 	Path                  string             `json:"Path"`
 	SHA256                string             `json:"SHA-256"`
@@ -29,7 +30,8 @@ type santaFileInfo struct {
 }
 
 // SigningChainInfo maps to the data output by santactl for signing info:
-//  https://github.com/google/santa/blob/d17aeac2f4331584db51de432ace3465026e1259/Source/santactl/Commands/SNTCommandFileInfo.m#L421-L427
+//
+//	https://github.com/google/santa/blob/d17aeac2f4331584db51de432ace3465026e1259/Source/santactl/Commands/SNTCommandFileInfo.m#L421-L427
 type signingChainInfo struct {
 	SHA256             string `json:"SHA-256"`
 	SHA1               string `json:"SHA-1"`

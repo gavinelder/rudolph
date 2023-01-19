@@ -29,7 +29,6 @@ func GetPrimaryKeysByMachineIDWhereMarkedForDeletion(client dynamodb.QueryAPI, m
 	}
 
 	output, err := client.Query(&input)
-
 	if err != nil {
 		return
 	}

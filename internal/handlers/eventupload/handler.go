@@ -24,7 +24,6 @@ type PostEventuploadHandler struct {
 	enableLambda bool
 }
 
-//
 func (h *PostEventuploadHandler) Boot() (err error) {
 	if h.booted {
 		return
@@ -58,12 +57,10 @@ func (h *PostEventuploadHandler) Boot() (err error) {
 	return
 }
 
-//
 func (h *PostEventuploadHandler) Handles(request events.APIGatewayProxyRequest) bool {
 	return request.Resource == "/eventupload/{machine_id}" && request.HTTPMethod == "POST"
 }
 
-//
 func (h *PostEventuploadHandler) Handle(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	log.Printf("EventUploadHandler request:\n%+v\n", request)
 

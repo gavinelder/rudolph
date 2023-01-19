@@ -5,3 +5,4 @@ package
 .terraform.lock.hcl
 .terraform.lock
 /rudolph
+*.vscode

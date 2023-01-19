@@ -22,7 +22,6 @@ type PostPreflightHandler struct {
 	timeProvider                clock.TimeProvider
 }
 
-//
 func (h *PostPreflightHandler) Boot() (err error) {
 	if h.booted {
 		return
@@ -43,12 +42,10 @@ func (h *PostPreflightHandler) Boot() (err error) {
 	return
 }
 
-//
 func (h *PostPreflightHandler) Handles(request events.APIGatewayProxyRequest) bool {
 	return request.Resource == "/preflight/{machine_id}" && request.HTTPMethod == "POST"
 }
 
-//
 func (h *PostPreflightHandler) Handle(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	// Get machineID from req.PathParameter of "machine_id" and it must be a valid UUID
 	machineID, errResponse, err := apiRequest.GetMachineID(request)

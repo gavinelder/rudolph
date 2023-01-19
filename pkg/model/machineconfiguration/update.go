@@ -22,7 +22,7 @@ func UpdateMachineConfigClientMode(client dynamodb.UpdateItemAPI, machineID stri
 		ClientMode: newClientMode,
 	}
 
-	//UpdateItem takes a key (pk/sk), item name --> match this to the column/struct tag, and interface to set
+	// UpdateItem takes a key (pk/sk), item name --> match this to the column/struct tag, and interface to set
 	_, err = client.UpdateItem(pk, clientMode)
 	if err != nil {
 		log.Print(errors.Wrap(err, " setting machine config failed"))
@@ -42,7 +42,7 @@ func UpdateGlobalConfigClientMode(client dynamodb.UpdateItemAPI, newClientMode t
 		ClientMode: newClientMode,
 	}
 
-	//UpdateItem takes a key (pk/sk), item name --> match this to the column/struct tag, and interface to set
+	// UpdateItem takes a key (pk/sk), item name --> match this to the column/struct tag, and interface to set
 	_, err = client.UpdateItem(pk, clientMode)
 	if err != nil {
 		log.Print(errors.Wrap(err, " setting global config failed"))
@@ -65,9 +65,7 @@ func GetConfigurationUpdater(client dynamodb.UpdateItemAPI, fetcher ConcreteConf
 	}
 }
 
-//
 // ConfigurationUpdater is an interface to accept a new configuration and update either a global or machine configuration
-//
 type ConfigurationUpdater interface {
 	UpdateGlobalConfig(configRequest MachineConfigurationUpdateRequest) (MachineConfiguration, error)
 	UpdateMachineConfig(machineID string, configRequest MachineConfigurationUpdateRequest) (MachineConfiguration, error)

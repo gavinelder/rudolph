@@ -10,7 +10,7 @@ import (
 const RUDOLPH_DIRECT_SOURCE = "rudolph-direct"
 
 func sendToLambda(kinesisClient lambda.LambdaClient, machineID string, events []EventUploadEvent) error {
-	var forwardedEvents = convertRequestEventsToUploadEvents(machineID, events)
+	forwardedEvents := convertRequestEventsToUploadEvents(machineID, events)
 	err := kinesisClient.Send(
 		machineID,
 		lambda.LambdaEvents{

@@ -9,7 +9,7 @@ import (
 )
 
 func TestHandler_InvalidMethod(t *testing.T) {
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod: "GET",
 	}
 
@@ -30,12 +30,14 @@ func (m mockSyncStateUpdater) updatePostflightDate(machineID string) error {
 }
 
 // Coerce the mock types
-var _ staleRuleDestroyer = mockRuleDestroyer(nil)
-var _ syncStateUpdater = mockSyncStateUpdater(nil)
+var (
+	_ staleRuleDestroyer = mockRuleDestroyer(nil)
+	_ syncStateUpdater   = mockSyncStateUpdater(nil)
+)
 
 func TestHandler_OK(t *testing.T) {
 	inputMachineID := "AAAAAAAA-A00A-1234-1234-5864377B4831"
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/eventupload/{machine_id}",
 		PathParameters: map[string]string{"machine_id": inputMachineID},
@@ -66,7 +68,7 @@ func TestHandler_OK(t *testing.T) {
 
 func TestHandler_Whoops(t *testing.T) {
 	inputMachineID := "AAAAAAAA-A00A-1234-1234-5864377B4831"
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/eventupload/{machine_id}",
 		PathParameters: map[string]string{"machine_id": inputMachineID},

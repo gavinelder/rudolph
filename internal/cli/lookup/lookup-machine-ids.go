@@ -10,8 +10,7 @@ import (
 )
 
 func init() {
-
-	var lookupMachineIDsCmd = &cobra.Command{
+	lookupMachineIDsCmd := &cobra.Command{
 		Use:   "machine-ids",
 		Short: "Attempts to search for a machine ID given a prefix or entire machine ID",
 		Args:  cobra.MaximumNArgs(1),

@@ -31,7 +31,7 @@ func init() {
 
 	tf := flags.TargetFlags{}
 
-	var configSetCmd = &cobra.Command{
+	configSetCmd := &cobra.Command{
 		Use:   "set [-m <machine-id>|--global] [-c <ClientMode - 'monitor' or 'lockdown'>|--client-mode]",
 		Short: "Create a configuration and set globally or a specific machine UUID",
 		Args:  cobra.NoArgs,
@@ -96,7 +96,8 @@ func applyConfig(
 	isEnabledTransitiveRules bool,
 	isCleanSync bool,
 	uploadLogsUrlArgs string,
-	fullSyncIntervalArg int) (err error) {
+	fullSyncIntervalArg int,
+) (err error) {
 	clientMode := clientModeArg.AsClientMode()
 
 	// Get machineID from flags
@@ -136,7 +137,11 @@ func applyConfig(
 	fmt.Fprintln(writer, "CleanSync:\t", isCleanSync)
 	fmt.Fprintln(writer, "FullSyncInterval:\t", fullSyncIntervalArg)
 	fmt.Fprintln(writer, "UploadLogUrl:\t \"", uploadLogsUrlArgs, "\"")
-	writer.Flush()
+	// handle err for writer.Flush
+	err = writer.Flush()
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Println()
 	fmt.Println(`Apply changes? (Enter: "yes" or "ok")`)
 	fmt.Print("> ")
@@ -176,5 +181,4 @@ func applyConfig(
 		fmt.Println("Success! Configuration was sent properly to DynamoDB...")
 	}
 	return
-
 }

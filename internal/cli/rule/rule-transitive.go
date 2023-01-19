@@ -12,7 +12,7 @@ func init() {
 	tf := flags.TargetFlags{}
 	rf := flags.RuleInfoFlags{}
 
-	var ruleTransitiveCmd = &cobra.Command{
+	ruleTransitiveCmd := &cobra.Command{
 		Use:     "transitive",
 		Aliases: []string{"allow-transitive"},
 		Short:   "Create a rule that applies the AllowlistTransitive policy to the specified file",

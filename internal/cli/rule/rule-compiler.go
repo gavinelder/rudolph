@@ -12,7 +12,7 @@ func init() {
 	tf := flags.TargetFlags{}
 	rf := flags.RuleInfoFlags{}
 
-	var ruleCompilerCmd = &cobra.Command{
+	ruleCompilerCmd := &cobra.Command{
 		Use:     "compiler  <file-path>",
 		Aliases: []string{"allow-complier"},
 		Short:   "Create a rule that applies the AllowlistCompiler policy to the specified file",

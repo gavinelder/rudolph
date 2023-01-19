@@ -2,7 +2,6 @@ package flags
 
 import (
 	"fmt"
-
 	"strings"
 
 	"github.com/airbnb/rudolph/pkg/types"
@@ -21,16 +20,13 @@ const (
 	removeShort             = "delete"
 )
 
-var (
-	rulePolicyArg RulePolicy
-)
+var rulePolicyArg RulePolicy
 
 type RuleUpdateFlags struct {
 	RulePolicy *RulePolicy
 }
 
 func (r *RuleUpdateFlags) AddRuleUpdateFlags(cmd *cobra.Command) {
-
 	// rule-policy is to specify the policy for edit commands
 	cmd.Flags().VarP(&rulePolicyArg, "rule-policy", "p", `type of rule being applied. valid options are: "allowlist", "blocklist", "silent_blocklist" or "remove"`)
 	_ = cmd.MarkFlagRequired("rule-policy")

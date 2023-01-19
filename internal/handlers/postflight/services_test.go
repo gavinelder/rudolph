@@ -42,18 +42,23 @@ func Test_ConcreteSyncStateUpdater_OK(t *testing.T) {
 	assert.Empty(t, err)
 }
 
-type mockQueryer func(input *awsdynamodb.QueryInput) (*awsdynamodb.QueryOutput, error)
-type mockDeleter func(key dynamodb.PrimaryKey) (*awsdynamodb.DeleteItemOutput, error)
+type (
+	mockQueryer func(input *awsdynamodb.QueryInput) (*awsdynamodb.QueryOutput, error)
+	mockDeleter func(key dynamodb.PrimaryKey) (*awsdynamodb.DeleteItemOutput, error)
+)
 
 func (m mockQueryer) Query(input *awsdynamodb.QueryInput) (*awsdynamodb.QueryOutput, error) {
 	return m(input)
 }
+
 func (m mockDeleter) DeleteItem(key dynamodb.PrimaryKey) (*awsdynamodb.DeleteItemOutput, error) {
 	return m(key)
 }
 
-var _ dynamodb.QueryAPI = mockQueryer(nil)
-var _ dynamodb.DeleteItemAPI = mockDeleter(nil)
+var (
+	_ dynamodb.QueryAPI      = mockQueryer(nil)
+	_ dynamodb.DeleteItemAPI = mockDeleter(nil)
+)
 
 func Test_RuleDeleter_OK(t *testing.T) {
 	destroyer := concreteRuleDestroyer{

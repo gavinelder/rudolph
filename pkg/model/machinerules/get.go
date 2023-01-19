@@ -15,7 +15,6 @@ func getItemAsMachineRule(client dynamodb.GetItemAPI, partitionKey string, sortK
 		},
 		false,
 	)
-
 	if err != nil {
 		return
 	}

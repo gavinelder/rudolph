@@ -27,7 +27,6 @@ func putItem(tableName string, api dynamodbPutItemAPI, item interface{}, timeout
 	defer cancel()
 
 	putItemItem, err := attributevalue.MarshalMap(item)
-
 	if err != nil {
 		return nil, err
 	}

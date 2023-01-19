@@ -10,8 +10,7 @@ import (
 )
 
 func init() {
-
-	var lookupSerialNumberCmd = &cobra.Command{
+	lookupSerialNumberCmd := &cobra.Command{
 		Use:   "serial-number",
 		Short: "Attempts to search for a machine ID given a serial number and returns the corresponding machine ID",
 		Args:  cobra.MaximumNArgs(1),

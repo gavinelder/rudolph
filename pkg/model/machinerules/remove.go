@@ -19,7 +19,6 @@ func RemoveMachineRule(getter dynamodb.GetItemAPI, updater dynamodb.UpdateItemAP
 		machineRulePK(machineID),
 		ruleSortKey,
 	)
-
 	if err != nil {
 		return errors.Wrap(err, "failed to retrieve existing rule")
 	}
@@ -29,7 +28,6 @@ func RemoveMachineRule(getter dynamodb.GetItemAPI, updater dynamodb.UpdateItemAP
 
 	// First pull the associated global rule if any
 	globalRule, err := globalrules.GetGlobalRuleBySortKey(getter, ruleSortKey)
-
 	if err != nil {
 		return errors.Wrap(err, "something went wrong during pulling global rule")
 	}
@@ -65,7 +63,6 @@ func RemoveMachineRule(getter dynamodb.GetItemAPI, updater dynamodb.UpdateItemAP
 
 	log.Printf("Successfully marked as 'remove'.")
 	return nil
-
 }
 
 // @deprecated

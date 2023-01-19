@@ -8,8 +8,10 @@ import (
 	"github.com/airbnb/rudolph/pkg/types"
 )
 
-const MachineRuleDefaultExpirationHours = 24
-const machineRulesPKPrefix = "MachineRules#"
+const (
+	MachineRuleDefaultExpirationHours = 24
+	machineRulesPKPrefix              = "MachineRules#"
+)
 
 type MachineRuleRow struct {
 	dynamodb.PrimaryKey
@@ -35,6 +37,7 @@ type updateRulePolicyRequest struct {
 func machineRulePK(machineID string) string {
 	return fmt.Sprintf("%s%s", machineRulesPKPrefix, machineID)
 }
+
 func machineRuleSK(sha256 string, ruleType types.RuleType) string {
 	return rules.RuleSortKeyFromTypeSHA(sha256, ruleType)
 }

@@ -8,7 +8,7 @@ import (
 )
 
 func sendToKinesis(kinesisClient kinesis.KinesisClient, machineID string, events []EventUploadEvent) error {
-	var forwardedEvents = convertRequestEventsToUploadEvents(machineID, events)
+	forwardedEvents := convertRequestEventsToUploadEvents(machineID, events)
 	err := kinesisClient.Send(machineID, kinesis.KinesisEvents{Items: forwardedEvents})
 	if err != nil {
 		log.Printf("Kinesis Failed: %s", err)

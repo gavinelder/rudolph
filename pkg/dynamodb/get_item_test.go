@@ -25,13 +25,11 @@ type unmarshalType struct {
 }
 
 func Test_getItemWithUnmarshal_Success(t *testing.T) {
-
 	var unmarshalTarget unmarshalType
 
 	output, err := getItemWithUnmarshal(
 		"test_table",
 		mockGetObjectAPI(func(ctx context.Context, params *dynamodb.GetItemInput, optFns ...func(*dynamodb.Options)) (*dynamodb.GetItemOutput, error) {
-
 			expectKey := map[string]types.AttributeValue{
 				"PK": &types.AttributeValueMemberS{
 					Value: "AA",

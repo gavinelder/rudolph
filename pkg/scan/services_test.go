@@ -23,7 +23,6 @@ type testItem struct {
 }
 
 func Test_ScanService(t *testing.T) {
-
 	scanner := scanApi(
 		func(in *awsdynamodb.ScanInput) (*awsdynamodb.ScanOutput, error) {
 			assert.Equal(t, int32(1), *in.Limit)

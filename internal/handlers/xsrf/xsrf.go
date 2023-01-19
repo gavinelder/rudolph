@@ -9,8 +9,7 @@ import (
 )
 
 // XSRFHandler handles requests to the /xsrf and /xsrf/{machine_id} API endpoints
-type PostXSRFHandler struct {
-}
+type PostXSRFHandler struct{}
 
 func (h *PostXSRFHandler) Boot() (err error) {
 	return

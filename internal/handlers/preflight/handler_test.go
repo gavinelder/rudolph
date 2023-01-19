@@ -19,7 +19,7 @@ import (
 func TestPreflightHandler_InvalidMethod(t *testing.T) {
 	// The API endpoint only accepts HTTP POST calls
 	// https://github.com/aws/aws-lambda-go/blob/master/events/apigw.go#L5-L19
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod: "GET",
 	}
 
@@ -29,7 +29,7 @@ func TestPreflightHandler_InvalidMethod(t *testing.T) {
 
 func TestPreflightHandler_IncorrectType(t *testing.T) {
 	// If the request contains a mediatype that's not json reject it
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/preflight/{machine_id}",
 		PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B4831"},
@@ -45,7 +45,7 @@ func TestPreflightHandler_IncorrectType(t *testing.T) {
 
 func TestPreflightHandler_InvalidPathParameter(t *testing.T) {
 	// If the request contains a non-valid path parameter
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/preflight/{machine_id}",
 		PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B48311"},
@@ -61,7 +61,7 @@ func TestPreflightHandler_InvalidPathParameter(t *testing.T) {
 
 func TestPreflightHandler_BlankPathParameter(t *testing.T) {
 	// If the request contains a blank path parameter
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/preflight/{machine_id}",
 		PathParameters: map[string]string{"machine_id": ""},
@@ -77,7 +77,7 @@ func TestPreflightHandler_BlankPathParameter(t *testing.T) {
 
 func TestPreflightHandler_EmptyBody(t *testing.T) {
 	// If the request contains a mediatype that's not json reject it
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/preflight/{machine_id}",
 		PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B4831"},
@@ -94,7 +94,7 @@ func TestPreflightHandler_EmptyBody(t *testing.T) {
 
 func TestPreflightHandler_InvalidBody(t *testing.T) {
 	// If the request contains a mediatype that's not json reject it
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/preflight/{machine_id}",
 		PathParameters: map[string]string{"machine_id": "AAAAAAAA-A00A-1234-1234-5864377B4831"},
@@ -138,7 +138,7 @@ func TestHandler_OK(t *testing.T) {
 	timeProvider := clock.FrozenTimeProvider{
 		Current: now,
 	}
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/preflight/{machine_id}",
 		PathParameters: map[string]string{"machine_id": inputMachineID},
@@ -212,7 +212,7 @@ func TestHandler_OK_Refresh_CleanSync(t *testing.T) {
 	timeProvider := clock.FrozenTimeProvider{
 		Current: now,
 	}
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/preflight/{machine_id}",
 		PathParameters: map[string]string{"machine_id": inputMachineID},
@@ -300,7 +300,7 @@ func TestHandler_OK_No_Refresh_CleanSync(t *testing.T) {
 	timeProvider := clock.FrozenTimeProvider{
 		Current: now,
 	}
-	var request = events.APIGatewayProxyRequest{
+	request := events.APIGatewayProxyRequest{
 		HTTPMethod:     "POST",
 		Resource:       "/preflight/{machine_id}",
 		PathParameters: map[string]string{"machine_id": inputMachineID},

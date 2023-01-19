@@ -19,7 +19,6 @@ func (m mockDeleteObjectAPI) DeleteItem(ctx context.Context, params *dynamodb.De
 }
 
 func Test_deleteItemFromDynamoDB_Success(t *testing.T) {
-
 	_, err := deleteItemFromDynamoDB(
 		"test_table_2",
 		mockDeleteObjectAPI(func(ctx context.Context, params *dynamodb.DeleteItemInput, optFns ...func(*dynamodb.Options)) (*dynamodb.DeleteItemOutput, error) {

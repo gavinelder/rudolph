@@ -18,7 +18,6 @@ type PostPostflightHandler struct {
 	syncStateUpdater syncStateUpdater
 }
 
-//
 func (h *PostPostflightHandler) Boot() (err error) {
 	if h.booted {
 		return
@@ -42,12 +41,10 @@ func (h *PostPostflightHandler) Boot() (err error) {
 	return
 }
 
-//
 func (h *PostPostflightHandler) Handles(request events.APIGatewayProxyRequest) bool {
 	return request.Resource == "/postflight/{machine_id}" && request.HTTPMethod == "POST"
 }
 
-//
 func (h *PostPostflightHandler) Handle(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	machineID, ok := request.PathParameters["machine_id"]
 	if !ok {

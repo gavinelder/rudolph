@@ -85,10 +85,17 @@ func retrieveConfig(cmd *cobra.Command) (*environmentConfiguration, error) {
 		return nil, err
 	}
 
-	cmd.Flags().Set("prefix", config.Prefix)
-	cmd.Flags().Set("region", config.Region)
-	cmd.Flags().Set("dynamodb_table", fmt.Sprintf("%s_rudolph_store", config.Prefix))
-
+	err = cmd.Flags().Set("prefix", config.Prefix)
+	if err != nil {
+		return nil, err
+	}
+	err = cmd.Flags().Set("region", config.Region)
+	if err != nil {
+		return nil, err
+	}
+	err = cmd.Flags().Set("dynamodb_table", fmt.Sprintf("%s_rudolph_store", config.Prefix))
+	if err != nil {
+		return nil, err
+	}
 	return config, err
-
 }
