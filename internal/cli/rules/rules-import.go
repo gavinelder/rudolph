@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"path"
 	"strings"
@@ -87,11 +86,7 @@ func runJsonImport(
 	if err != nil {
 		return
 	}
-	defer func() {
-		if err := fp.Close(); err != nil {
-			log.Fatal("failed to close file")
-		}
-	}()
+	fp.Close()
 	contents, err := io.ReadAll(fp)
 	if err != nil {
 		return

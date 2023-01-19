@@ -2,7 +2,6 @@ package config
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"text/tabwriter"
 
@@ -100,10 +99,7 @@ func getConfig(service machineconfiguration.MachineConfigurationService, tf flag
 	fmt.Fprintln(writer, "CleanSync:\t", config.CleanSync)
 	fmt.Fprintln(writer, "FullSyncInterval:\t", config.FullSyncInterval)
 	fmt.Fprintln(writer, "UploadLogUrl:\t \"", config.UploadLogsURL, "\"")
-	err = writer.Flush()
-	if err != nil {
-		log.Fatal("Enable to flush writer:", err)
-	}
+	writer.Flush()
 
 	return
 }

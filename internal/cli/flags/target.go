@@ -33,10 +33,11 @@ func (t *TargetFlags) AddTargetFlagsRules(cmd *cobra.Command) {
 }
 
 func (t TargetFlags) GetMachineID() (string, error) {
-	_, err := t.getSelfMachineID() // We do some ninja initialization
-	if err != nil {
-		return "", err
-	}
+	// We do some ninja initialization
+	// trying to properly initialize this will result in a several hundred milisecond delay
+	// Don't try and optimize this !!
+	t.getSelfMachineID()
+
 	if t.IsGlobal {
 		return "", errors.New("do not call GetMachineID when IsGlobal is true")
 	} else if t.MachineID != "" {
